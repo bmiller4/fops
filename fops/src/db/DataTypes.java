@@ -5,15 +5,24 @@
 package db;
 
 public class DataTypes {
-    public static enum Colleges {
+    public static enum College {
         ARTS_AND_SCIENCES,
         BUSINESS,
-        EDUCATION
+        EDUCATION;
+
+        public static final int size = DataTypes.College.values().length;
     }
 
     public static enum Gender {
         MALE,
         FEMALE
+    }
+
+    public static enum Rank {
+        INSTRUCTOR,
+        ASSISTANT,
+        ASSOCIATE,
+        PROFESSOR        
     }
 
     public static enum CommitteeType {
@@ -32,7 +41,7 @@ public class DataTypes {
 //        RELG, SOCG, SPAN, THEA, WGST
 //    }
 
-    public static enum Disciplines {
+    public static enum Discipline {
         AMER_STUDIES, ANTHRO, ARTS, BIOLOGY, CHEMISTRY,
         CLASSICS, COMP_SCI, ECONOMICS, ENGLISH, ENV_SCI,
         FRENCH, GEOGRAPHY, GEOLOGY, HIST_PRESERVATION, HISTORY,

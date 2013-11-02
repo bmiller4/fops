@@ -10,24 +10,27 @@ import java.util.ArrayList;
 public class Staff {
 
     private String name;
-    private DataTypes.Colleges college;
+    private DataTypes.College college;
     private DataTypes.Gender gender;
-    private DataTypes.Disciplines discipline;
+    private DataTypes.Discipline discipline;
+    private DataTypes.Rank rank;
     private int startYear;
     private List<CommitteeAppointment> committees;
 
     public Staff() {
         this("John Doe", DataTypes.Gender.MALE, 
-                DataTypes.Colleges.BUSINESS, DataTypes.Disciplines.LATIN, 1985);
+                DataTypes.College.BUSINESS, DataTypes.Discipline.LATIN, 
+                DataTypes.Rank.PROFESSOR, 1985);
     }
 
     public Staff(String name, DataTypes.Gender gender, 
-            DataTypes.Colleges college, DataTypes.Disciplines discipline, 
-            int startYear) {
+            DataTypes.College college, DataTypes.Discipline discipline, 
+            DataTypes.Rank rank, int startYear) {
         this.name = name;
         this.gender = gender;
         this.college = college;
         this.discipline = discipline;
+        this.rank = rank;
         this.startYear = startYear;
         committees = new ArrayList<CommitteeAppointment>();
     }
@@ -42,5 +45,9 @@ public class Staff {
 
     public String getName() {
         return name;
+    }
+
+    public DataTypes.College getCollege() {
+        return college;
     }
 }
