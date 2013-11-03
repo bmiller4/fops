@@ -56,6 +56,10 @@ public class Committee {
         return representatives;
     }
 
+    public int numAtLargeMembers() {
+        return atLargeMembers.size();
+    }
+
     public boolean isMember(String name) {
         return (atLargeMembers.contains(name)
                 || representativeMembers.contains(name));

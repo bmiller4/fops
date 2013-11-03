@@ -1,5 +1,5 @@
 /**
- * Data object for staff members in the FOPS db
+ * Data object for staff members in the FOPS db.
  */
 
 package db;
@@ -49,5 +49,9 @@ public class Staff {
 
     public DataTypes.College getCollege() {
         return college;
+    }
+
+    public DataTypes.Rank getRank() {
+        return rank;
     }
 }
