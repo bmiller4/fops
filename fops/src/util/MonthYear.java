@@ -19,6 +19,17 @@ public class MonthYear {
         this.year = year;
     }
 
+    public MonthYear(Calendar calendar) {
+        this(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
+        //int month = calendar.get(Calendar.MONTH);
+        //int year = calendar.get(Calendar.YEAR);
+        //this(m, y);
+    }
+
+    public MonthYear() {
+        this(Calendar.getInstance());
+    }
+
     public int getMonth() {
         return month;
     }
@@ -28,10 +39,10 @@ public class MonthYear {
     }
 
     public MonthYear timeSince() {
-        Calendar calendar = Calendar.getInstance();
-        int m = calendar.get(Calendar.MONTH);
-        int y = calendar.get(Calendar.YEAR);
-        return difference(m, y);
+        //Calendar calendar = Calendar.getInstance();
+        //int m = calendar.get(Calendar.MONTH);
+        //int y = calendar.get(Calendar.YEAR);
+        return difference(new MonthYear());
     }
 
     public MonthYear difference(int month, int year) {

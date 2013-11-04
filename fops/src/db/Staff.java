@@ -66,4 +66,8 @@ public class Staff {
     public boolean getTenure() {
         return hasTenure;
     }
+
+    public void addCommitteeAppointment(CommitteeAppointment appointment) {
+        committees.add(appointment);
+    }
 }

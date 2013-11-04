@@ -7,6 +7,7 @@ package db;
 import java.util.List;
 import java.util.ArrayList;
 import db.rules.*;
+import util.*;
 
 public class Committee {
     
@@ -40,6 +41,9 @@ public class Committee {
         if (isMember(member))
             return;
         atLargeMembers.add(member);
+        member.addCommitteeAppointment(
+                new CommitteeAppointment(this.name, this.type, 
+                    new MonthYear()));
     }
 
     public void addRepresentativeMember(Staff member) {

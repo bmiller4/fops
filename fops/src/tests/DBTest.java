@@ -55,6 +55,8 @@ public class DBTest {
         status("Adding staff");
         for (Staff staff : faculty) {
             db.addFaculty(staff);
+            db.getCommittee(com1).addAtLargeMember(
+                    db.getFaculty(staff.getName()));
         }
 
         /* Check Staff Against Rules*/
