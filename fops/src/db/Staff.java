@@ -6,6 +6,7 @@ package db;
 
 import java.util.List;
 import java.util.ArrayList;
+import util.MonthYear;
 
 public class Staff {
 
@@ -14,24 +15,24 @@ public class Staff {
     private DataTypes.Gender gender;
     private DataTypes.Discipline discipline;
     private DataTypes.Rank rank;
-    private int startYear;
+    private MonthYear startDate;
     private List<CommitteeAppointment> committees;
 
     public Staff() {
         this("John Doe", DataTypes.Gender.MALE, 
                 DataTypes.College.BUSINESS, DataTypes.Discipline.LATIN, 
-                DataTypes.Rank.PROFESSOR, 1985);
+                DataTypes.Rank.PROFESSOR, new MonthYear(9, 1985));
     }
 
     public Staff(String name, DataTypes.Gender gender, 
             DataTypes.College college, DataTypes.Discipline discipline, 
-            DataTypes.Rank rank, int startYear) {
+            DataTypes.Rank rank, MonthYear startYear) {
         this.name = name;
         this.gender = gender;
         this.college = college;
         this.discipline = discipline;
         this.rank = rank;
-        this.startYear = startYear;
+        this.startDate = startDate;
         committees = new ArrayList<CommitteeAppointment>();
     }
 
@@ -39,8 +40,12 @@ public class Staff {
         this.name = name;
     }
 
-    public void setStartYear(int startYear) {
-       this.startYear = startYear; 
+    public void setStartDate(MonthYear startDate) {
+       this.startDate = startDate; 
+    }
+
+    public MonthYear getStartDate() {
+        return startDate;
     }
 
     public String getName() {

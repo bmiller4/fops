@@ -6,45 +6,50 @@ package db;
 
 import java.util.List;
 import java.util.ArrayList;
+import db.rules.*;
 
 public class Committee {
     
     private String name;
-    private String chair;
-    private String secretary;
+    private Staff chair;
+    private Staff secretary;
     private DataTypes.CommitteeType type;
-    private List<String> atLargeMembers;
-    private List<String> representativeMembers;
-    private int numAtLargeMembers;
-    private int representativesPerCollege;
+    private List<Staff> atLargeMembers;
+    private List<Staff> representativeMembers;
+    //private int numAtLargeMembers;
+    //private int representativesPerCollege;
+    private List<Rule> rules;
 
     public Committee(String name) {
-        this(name, "", "", DataTypes.CommitteeType.UNIVERSITY);
+        this(name, DataTypes.CommitteeType.UNIVERSITY, null);
     }
 
     public Committee(String name, DataTypes.CommitteeType type,
-            int numAtLargeMembers, int representativesPerCollege) {
+            List<Rule> rules) {
         this.name = name;
         this.type = type;
-        this.numAtLargeMembers = numAtLargeMembers;
-        this.representativesPerCollege = representativesPerCollege
+        this.rules = (rules == null) ? new ArrayList<Rule>() : rules;
+        //this.numAtLargeMembers = numAtLargeMembers;
+        //this.representativesPerCollege = representativesPerCollege
 
-        atLargeMembers = new ArrayList<String>(numAtLargeMembers);
-        representativeMembers = 
-                new ArrayList<String>(representativesPerCollege *
-                DataTypes.College.size);
+        atLargeMembers = new ArrayList<Staff>();
+        representativeMembers = new ArrayList<Staff>();
     }
 
-    public void addAtLargeMember(String name) {
-        if (isMember(name))
-            return;
-        atLargeMembers.add(name);
+    public String getName() {
+        return name;
     }
 
-    public void addRepresentativeMember(String name) {
-        if (isMember(name))
+    public void addAtLargeMember(Staff member) {
+        if (isMember(member))
             return;
-        representativeMembers.add(name);
+        atLargeMembers.add(member);
+    }
+
+    public void addRepresentativeMember(Staff member) {
+        if (isMember(member))
+            return;
+        representativeMembers.add(member);
     }
 
     public int numRepresentativesOfCollege(DataTypes.College college) {
@@ -56,26 +61,35 @@ public class Committee {
         return representatives;
     }
 
+    public List<Staff> representativesOfCollege(DataTypes.College college) {
+        List<Staff> reps = new ArrayList<Staff>();
+        for (Staff member : representativeMembers) {
+            if (member.getCollege() == college)
+                reps.add(member);
+        }
+        return reps;
+    }
+
     public int numAtLargeMembers() {
         return atLargeMembers.size();
     }
 
-    public boolean isMember(String name) {
-        return (atLargeMembers.contains(name)
-                || representativeMembers.contains(name));
+    public boolean isMember(Staff member) {
+        return (atLargeMembers.contains(member)
+                || representativeMembers.contains(member));
     }
 
-    public void setChair(String name) {
-        if (isMember(name)) {
-            chair = name;
+    public void setChair(Staff member) {
+        if (isMember(member)) {
+            chair = member;
         } else {
             // TODO: throw exception here
         }
     }
 
-    public void setSecretary(String name) {
-        if (isMember(name)) {
-            secretary = name;
+    public void setSecretary(Staff member) {
+        if (isMember(member)) {
+            secretary = member;
         } else {
             // TODO: throw exception here
         }

@@ -3,6 +3,10 @@
  * on a committee.
  */
 
+package db.rules;
+
+import db.*;
+
 public class NumberRepresentativesRule implements Rule {
 
     private String description;

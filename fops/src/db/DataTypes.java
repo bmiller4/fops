@@ -4,7 +4,7 @@
 
 package db;
 
-public static class DataTypes {
+public class DataTypes {
     public static enum College {
         ARTS_AND_SCIENCES,
         BUSINESS,
@@ -20,11 +20,11 @@ public static class DataTypes {
 
     public static enum Rank {
         LECTURER("lecturer"),
-        SENIOR_LECTURER("senior lecturer");
+        SENIOR_LECTURER("senior lecturer"),
         INSTRUCTOR("instructor"),
         ASSISTANT("assistant professor"),
         ASSOCIATE("associate professor"),
-        PROFESSOR("professor"),
+        PROFESSOR("professor");
 
         private final String humanReadable;
 

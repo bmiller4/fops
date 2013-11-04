@@ -2,17 +2,19 @@
  * The big ol' honking database class for FOPS.
  */
 
+package db;
+
 import java.util.Map;
 import java.util.Hashtable;
 
-public class FOPSdb {
+public class fopsDB {
 
     private Map<String, Staff> faculty;
     private Map<String, Committee> committees;
 
-    public FOPSdb() {
+    public fopsDB() {
         faculty = new Hashtable<String, Staff>();
-        committees = new Hashtable<String, Staff>();
+        committees = new Hashtable<String, Committee>();
     }
 
     public void addCommittee(Committee committee) {
@@ -20,6 +22,14 @@ public class FOPSdb {
     }
 
     public void addFaculty(Staff faculty) {
-        faculty.put(faculty.getName(), faculty):
+        this.faculty.put(faculty.getName(), faculty);
+    }
+
+    public Committee getCommittee(String name) {
+        return committees.get(name);
+    }
+
+    public Staff getFaculty(String name) {
+        return faculty.get(name);
     }
 }

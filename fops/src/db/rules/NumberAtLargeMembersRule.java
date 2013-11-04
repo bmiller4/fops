@@ -1,4 +1,10 @@
+/**
+ * Rule specifying how many at-large members a committee should contain.
+ */
 
+package db.rules;
+
+import db.*;
 
 public class NumberAtLargeMembersRule implements Rule {
 

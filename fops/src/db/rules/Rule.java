@@ -4,6 +4,8 @@
 
 package db.rules;
 
+import db.*;
+
 public interface Rule {
 
 //    public final String description;

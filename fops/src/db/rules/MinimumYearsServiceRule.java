@@ -1,4 +1,11 @@
+/**
+ * Rule specifying how long a committee member must have served at UMW.
+ */
 
+package db.rules;
+
+import util.MonthYear;
+import db.*;
 
 public class MinimumYearsServiceRule implements Rule {
 
@@ -19,6 +26,7 @@ public class MinimumYearsServiceRule implements Rule {
 
     @Override
     public boolean isValidMember(Committee committee, Staff faculty) {
-        //TODO: fill this in
+        return (faculty.getStartDate().timeSince().getYear()
+                < minYearsService);
     }
 }

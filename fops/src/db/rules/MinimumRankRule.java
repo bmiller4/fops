@@ -5,6 +5,8 @@
 
 package db.rules;
 
+import db.*;
+
 public class MinimumRankRule implements Rule {
 
     private DataTypes.Rank rank;

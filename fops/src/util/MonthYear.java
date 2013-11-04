@@ -48,5 +48,6 @@ public class MonthYear {
             dyear = my.getYear() - year - 1;
         }
         dmonth = (my.getMonth() - month);
+        return new MonthYear(dmonth, dyear);
     }
 }

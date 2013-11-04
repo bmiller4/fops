@@ -2,9 +2,11 @@
  * Test class for Staff.java
  */
 
-package db;
+package tests;
 
 import com.google.gson.Gson;
+import db.*;
+import db.rules.*;
 
 public class TestStaff {
     public static void main(String[] args) {
