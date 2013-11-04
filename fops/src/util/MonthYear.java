@@ -21,9 +21,6 @@ public class MonthYear {
 
     public MonthYear(Calendar calendar) {
         this(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
-        //int month = calendar.get(Calendar.MONTH);
-        //int year = calendar.get(Calendar.YEAR);
-        //this(m, y);
     }
 
     public MonthYear() {

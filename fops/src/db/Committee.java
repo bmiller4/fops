@@ -41,15 +41,29 @@ public class Committee {
         if (isMember(member))
             return;
         atLargeMembers.add(member);
-        member.addCommitteeAppointment(
-                new CommitteeAppointment(this.name, this.type, 
-                    new MonthYear()));
+        addAppointment(member);
     }
 
     public void addRepresentativeMember(Staff member) {
         if (isMember(member))
             return;
         representativeMembers.add(member);
+        addAppointment(member);
+    }
+
+    private void addAppointment(member) {
+        member.addCommitteeAppointment(
+                new CommitteeAppointment(this.name, this.type, 
+                    new MonthYear()));
+
+    }
+
+    public boolean canJoin(Staff member) {
+        for (Rule rule : rules) {
+            if (!rule.isValidMember(this, member)
+                return false;
+        }
+        return true;
     }
 
     public int numRepresentativesOfCollege(DataTypes.College college) {
