@@ -16,8 +16,6 @@ public class Committee {
     private DataTypes.CommitteeType type;
     private List<Staff> atLargeMembers;
     private List<Staff> representativeMembers;
-    //private int numAtLargeMembers;
-    //private int representativesPerCollege;
     private List<Rule> rules;
 
     public Committee(String name) {
@@ -29,8 +27,6 @@ public class Committee {
         this.name = name;
         this.type = type;
         this.rules = (rules == null) ? new ArrayList<Rule>() : rules;
-        //this.numAtLargeMembers = numAtLargeMembers;
-        //this.representativesPerCollege = representativesPerCollege
 
         atLargeMembers = new ArrayList<Staff>();
         representativeMembers = new ArrayList<Staff>();
