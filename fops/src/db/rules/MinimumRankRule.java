@@ -10,18 +10,16 @@ import db.*;
 public class MinimumRankRule implements Rule {
 
     private DataTypes.Rank rank;
-    private final String description;
     
     public MinimumRankRule(DataTypes.Rank rank) {
         this.rank = rank;
-        description = String.format(
-                "Members of this committee must have at least rank %s",
-                rank.getHumanReadable());
     }
 
     @Override
     public String getDescription() {
-        return description;
+        return String.format(
+                "Members of this committee must have at least rank %s",
+                rank.getHumanReadable());
     }
 
     @Override

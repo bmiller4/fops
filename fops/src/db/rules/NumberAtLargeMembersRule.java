@@ -9,18 +9,16 @@ import db.*;
 public class NumberAtLargeMembersRule implements Rule {
 
     private int maxAtLargeMembers;
-    private String description;
 
     public NumberAtLargeMembersRule(int maxAtLargeMembers) {
         this.maxAtLargeMembers = maxAtLargeMembers;
-        description = String.format(
-                "This committee requires %d at-large members",
-                maxAtLargeMembers);
     } 
 
     @Override
     public String getDescription() {
-        return description;
+        return String.format(
+                "This committee requires %d at-large members",
+                maxAtLargeMembers);
     }
 
     @Override

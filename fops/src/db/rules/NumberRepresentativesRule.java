@@ -9,19 +9,17 @@ import db.*;
 
 public class NumberRepresentativesRule implements Rule {
 
-    private String description;
     private int representativesPerCollege;
 
     public NumberRepresentativesRule(int representativesPerCollege) {
         this.representativesPerCollege = representativesPerCollege;
-        description = String.format(
-                "This committee requires %d representatives per college.",
-                representativesPerCollege);
     }
 
     @Override
     public String getDescription() {
-        return description;
+        return String.format(
+                "This committee requires %d representatives per college.",
+                representativesPerCollege);
     }
 
     @Override
