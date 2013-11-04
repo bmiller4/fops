@@ -27,6 +27,6 @@ public class MinimumYearsServiceRule implements Rule {
     @Override
     public boolean isValidMember(Committee committee, Staff faculty) {
         return (faculty.getStartDate().timeSince().getYear()
-                < minYearsService);
+                >= minYearsService);
     }
 }

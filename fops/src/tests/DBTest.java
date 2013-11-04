@@ -15,12 +15,6 @@ import util.*;
 
 public class DBTest {
 
-//    private fopsDB;
-//
-//    public DBTest() {
-//        fopsDB = new FopsDB();
-//    }
-
     public static void status(String str) {
         System.out.println(str);
     }
@@ -55,7 +49,7 @@ public class DBTest {
         faculty.add(new Staff("Jane Doe", DataTypes.Gender.FEMALE,
                 DataTypes.College.ARTS_AND_SCIENCES,
                 DataTypes.Discipline.BIOLOGY, DataTypes.Rank.INSTRUCTOR,
-                new MonthYear(1, 2010), false));
+                new MonthYear(1, 2011), false));
 
         /* Add Staff */
         status("Adding staff");
@@ -70,11 +64,6 @@ public class DBTest {
         for (Staff staff : faculty) {
             boolean canJoin = true; 
             for (Rule rule : rules) {
-                // until boolean isValid just null pointer tests
-                db.getCommittee(com1);
-                if (staff.getStartDate() == null)
-                    status("crap");
-                staff.getStartDate().timeSince();
                 boolean isValid = 
                         rule.isValidMember(db.getCommittee(com1), staff);
                 System.out.printf("%s: %s %s join.\n",
