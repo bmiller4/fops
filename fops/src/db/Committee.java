@@ -51,7 +51,7 @@ public class Committee {
         addAppointment(member);
     }
 
-    private void addAppointment(member) {
+    private void addAppointment(Staff member) {
         member.addCommitteeAppointment(
                 new CommitteeAppointment(this.name, this.type, 
                     new MonthYear()));
@@ -60,10 +60,39 @@ public class Committee {
 
     public boolean canJoin(Staff member) {
         for (Rule rule : rules) {
-            if (!rule.isValidMember(this, member)
+            if (!rule.isValidMember(this, member))
                 return false;
         }
         return true;
+    }
+
+    public void removeRepresentativeMember(Staff member) {
+//        if (!isMember(member))
+//            return;
+//        closeAppointment(member);
+//        representativeMembers.remove(member);
+        removeMember(representativeMembers, member);
+    }
+
+    public void removeAtLargeMember(Staff member) {
+//        if (!isMember(member))
+//            return;
+//        closeAppointment(member);
+//        atLargeMembers.remove(member);
+        removeMember(atLargeMembers, member);
+    }
+
+    private void removeMember(List<Staff> memberList, Staff member) {
+        if (!isMember(member)) {
+            // TODO: consider exception
+            return;
+        }
+        closeAppointment(member);
+        memberList.remove(member);
+    }
+
+    private void closeAppointment(Staff member) {
+        member.closeCommitteeAppointment(this.name, new MonthYear());
     }
 
     public int numRepresentativesOfCollege(DataTypes.College college) {

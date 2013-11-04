@@ -74,6 +74,14 @@ public class DBTest {
             }
         }
 
+        /* Remove Staff from Committee */
+        status("Removing staff from committee");
+        db.getCommittee(com1).removeAtLargeMember(db.getFaculty("Jane Doe"));
+
+        /* Check name pointerness */
+        status("Checking that changes are reflected through JSON");
+        db.getFaculty("John Doe").setName("John Fro");
+
         gson.toJson(db, System.out); 
         System.out.println();
     }

@@ -70,4 +70,14 @@ public class Staff {
     public void addCommitteeAppointment(CommitteeAppointment appointment) {
         committees.add(appointment);
     }
+
+    public void closeCommitteeAppointment(String committee,
+            MonthYear endDate) {
+        for (CommitteeAppointment appointment : committees) {
+            if (appointment.isOpen() 
+                    && appointment.getCommittee().equals(committee)) {
+                appointment.setEndDate(endDate);
+            }
+        }
+    }
 }
