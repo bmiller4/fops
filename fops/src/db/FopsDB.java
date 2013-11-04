@@ -7,12 +7,12 @@ package db;
 import java.util.Map;
 import java.util.Hashtable;
 
-public class fopsDB {
+public class FopsDB {
 
     private Map<String, Staff> faculty;
     private Map<String, Committee> committees;
 
-    public fopsDB() {
+    public FopsDB() {
         faculty = new Hashtable<String, Staff>();
         committees = new Hashtable<String, Committee>();
     }
