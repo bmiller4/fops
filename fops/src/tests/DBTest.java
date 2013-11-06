@@ -6,6 +6,11 @@ package tests;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import com.google.gson.Gson;
 
@@ -82,7 +87,28 @@ public class DBTest {
         status("Checking that changes are reflected through JSON");
         db.getFaculty("John Doe").setName("John Fro");
 
-        gson.toJson(db, System.out); 
-        System.out.println();
+        String json = gson.toJson(db); 
+		String test = "test";
+        System.out.println(json);
+
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter("fopsdb.json", true));
+			writer.write(test, 0, test.length());
+			writer.write(json, 0, json.length());
+			writer.flush();
+			//gson.toJson(db, writer);
+		} catch (IOException e) {
+			System.err.println("Cannot open file fopsdb.json");
+			System.exit(1);
+		}
+		/*
+		try {
+			//writer.write(gson.toJson(db));
+		} catch (IOException e) {
+			System.err.println("Cannot write to file fopsdb.json");
+		}
+		*/
     }
 }
+
