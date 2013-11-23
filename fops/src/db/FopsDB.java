@@ -33,19 +33,13 @@ public class FopsDB {
         return gson;
     }
 
-    public String[] toJson() {
-        String maps[] = new String[2];
-        maps[0] = gson.toJson(faculty);
-        maps[1] = gson.toJson(committees);
-        return maps;
+    public String toJson() {
+        return gson.toJson(this);
     }
 
-    public static FopsDB fromJson(String faculty, String committees) {
-        FopsDB db = new FopsDB();
-        Type facType = new TypeToken<Map<String, Staff>>(){}.getType();
-        Type comType = new TypeToken<Map<String, Committee>>(){}.getType();
-        db.faculty = gson.fromJson(faculty, facType);
-        db.committees = gson.fromJson(committees, comType);
+    public static FopsDB fromJson(String json) {
+        FopsDB db = new FopsDB()
+        db = gson.fromJson(json, FopsDB.class);
         return db;
     }
 
