@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
 
@@ -81,7 +82,8 @@ public class DBTest {
 
         /* Remove Staff from Committee */
         status("Removing staff from committee");
-        db.getCommittee(com1).removeAtLargeMember(db.getFaculty("Jane Doe"));
+        db.getCommittee(com1).removeAtLargeMember(
+                db.getFaculty("Jane Doe"));
 
         /* Check name pointerness */
         status("Checking that changes are reflected through JSON");
@@ -93,22 +95,61 @@ public class DBTest {
 
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new FileWriter("fopsdb.json", true));
-			writer.write(test, 0, test.length());
-			writer.write(json, 0, json.length());
-			writer.flush();
+			writer = new BufferedWriter(
+                    new FileWriter("fopsdb.json", true));
+			//writer.write(test, 0, test.length());
+			//writer.write(json, 0, json.length());
+			//writer.flush();
+            for (String str : db.toJson()) {
+                writer.write(str, 0, str.length());
+                writer.newLine();
+            }
 			//gson.toJson(db, writer);
 		} catch (IOException e) {
 			System.err.println("Cannot open file fopsdb.json");
 			System.exit(1);
-		}
-		/*
-		try {
-			//writer.write(gson.toJson(db));
-		} catch (IOException e) {
-			System.err.println("Cannot write to file fopsdb.json");
-		}
-		*/
+		} 
+        if (writer != null) {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                System.err.println("Could not close writer, not aborting.");
+            }
+        }
+
+        System.out.println("Checking that file read in properly");
+        BufferedReader reader = null;
+        Scanner scan = null;
+        String facjson, comjson;
+        FopsDB db2 = null;
+        try {
+            reader = new BufferedReader(
+                    new FileReader("fopsdb.json"));
+            scan = new Scanner(reader);
+            facjson = scan.nextLine();
+            comjson = scan.nextLine();
+            db2 = FopsDB.fromJson(facjson, comjson);
+        } catch (IOException e) {
+            System.err.println("Cannot open file fopsdb.json");
+            System.exit(1);
+        } finally {
+            if (scan != null) {
+                scan.close();
+            }
+        }
+        if (reader != null) {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                System.err.println("Could not close reader, not aborting.");
+            }
+        }
+
+        if (db2 != null) {
+            System.out.println(gson.toJson(db2));
+        } else {
+            System.out.println("Ruh roh, Raggy! db2 did not load!");
+        }
     }
 }
 

@@ -54,7 +54,7 @@ public class Committee {
     private void addAppointment(Staff member) {
         member.addCommitteeAppointment(
                 new CommitteeAppointment(this.name, this.type, 
-                    new MonthYear()));
+                new MonthYear()));
 
     }
 
@@ -67,18 +67,10 @@ public class Committee {
     }
 
     public void removeRepresentativeMember(Staff member) {
-//        if (!isMember(member))
-//            return;
-//        closeAppointment(member);
-//        representativeMembers.remove(member);
         removeMember(representativeMembers, member);
     }
 
     public void removeAtLargeMember(Staff member) {
-//        if (!isMember(member))
-//            return;
-//        closeAppointment(member);
-//        atLargeMembers.remove(member);
         removeMember(atLargeMembers, member);
     }
 
@@ -98,8 +90,9 @@ public class Committee {
     public int numRepresentativesOfCollege(DataTypes.College college) {
         int representatives = 0;
         for (Staff member : representativeMembers) {
-            if (member.getCollege() == college)
+            if (member.getCollege() == college) {
                 representatives++;
+            }
         }
         return representatives;
     }
@@ -107,8 +100,9 @@ public class Committee {
     public List<Staff> representativesOfCollege(DataTypes.College college) {
         List<Staff> reps = new ArrayList<Staff>();
         for (Staff member : representativeMembers) {
-            if (member.getCollege() == college)
+            if (member.getCollege() == college) {
                 reps.add(member);
+            }
         }
         return reps;
     }
