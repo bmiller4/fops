@@ -14,18 +14,18 @@ import db.rules.*;
 
 public class FopsDB {
 
-    private Map<String, Staff> faculty;
+    private Map<Integer, Staff> faculty;
     private Map<String, Committee> committees;
     private static Gson gson;
     static {
         GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting();
+        //builder.setPrettyPrinting();
         builder.registerTypeAdapter(Rule.class, new RuleJsonizer());
         gson = builder.create();
     }
 
     public FopsDB() {
-        faculty = new Hashtable<String, Staff>();
+        faculty = new Hashtable<Integer, Staff>();
         committees = new Hashtable<String, Committee>();
     }
 
@@ -38,8 +38,11 @@ public class FopsDB {
     }
 
     public static FopsDB fromJson(String json) {
-        FopsDB db = new FopsDB()
+        FopsDB db = new FopsDB();
         db = gson.fromJson(json, FopsDB.class);
+        for (Committee committee : db.committees.values()) {
+            committee.setDB(db);
+        }
         return db;
     }
 
@@ -48,14 +51,24 @@ public class FopsDB {
     }
 
     public void addFaculty(Staff faculty) {
-        this.faculty.put(faculty.getName(), faculty);
+        this.faculty.put(faculty.getDBID(), faculty);
     }
 
     public Committee getCommittee(String name) {
         return committees.get(name);
     }
 
+    public Staff getFaculty(int dbid) {
+        return faculty.get(dbid);
+    }
+
     public Staff getFaculty(String name) {
-        return faculty.get(name);
+        for (Staff person : faculty.values()) {
+            if (name.equals(person.getName())) {
+                return person;
+            }
+        }
+        //TODO throw exception instead
+        return null;
     }
 }

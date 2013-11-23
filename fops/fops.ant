@@ -1,0 +1,29 @@
+<project name="FOPS" default="tests" basedir=".">
+    <description>
+        Build file
+    </description>
+    <!-- I have no idea what I'm doing -->
+    <property name="src" location="src"/>
+    <property name="bin" location="bin"/>
+    <property name="tests" location="src/tests"/>
+
+    <target name="compile" description="compile the source">
+        <!-- Compile all but the tests from ${src} into ${bin} -->
+        <javac srcdir="${src}" destdir="${bin}">
+            <classpath>
+                <pathelement path="${classpath}"/>
+                <pathelement location="${src}/gson-2.2.4.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="tests" depends="compile" description="compile the tests">
+        <!-- Compile the tests -->
+        <javac srcdir="${tests}" destdir="${bin}">
+            <classpath>
+                <pathelement path="${classpath}"/>
+                <pathelement location="${src}/gson-2.2.4.jar"/>
+            </classpath>
+        </javac>
+    </target>
+</project>

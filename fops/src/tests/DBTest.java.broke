@@ -14,13 +14,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import db.*;
 import db.rules.*;
 import util.*;
 
-public class GsonTest {
+public class DBTest {
 
     public static void status(String str) {
         System.out.println(str);
@@ -28,8 +27,7 @@ public class GsonTest {
 
     public static void main(String args[]) {
         FopsDB db = new FopsDB();
-        Gson gson = db.getGson();
-        GsonBuilder builder = new GsonBuilder();
+        Gson gson = new Gson();
         List<Rule> rules = new ArrayList<Rule>();
         List<Staff> faculty = new ArrayList<Staff>();
 
@@ -67,19 +65,42 @@ public class GsonTest {
                     db.getFaculty(staff.getName()));
         }
 
+        /* Check Staff Against Rules*/
+        status("Checking against rules");
+        String validity;
+        String format;
+        for (Staff staff : faculty) {
+            boolean canJoin = true; 
+            for (Rule rule : rules) {
+                boolean isValid = 
+                        rule.isValidMember(db.getCommittee(com1), staff);
+                System.out.printf("%s: %s %s join.\n",
+                        rule.getDescription(), staff.getName(),
+                        isValid ? "can" : "cannot");
+            }
+        }
+
+        /* Remove Staff from Committee */
+        status("Removing staff from committee");
+        db.getCommittee(com1).removeAtLargeMember(
+                db.getFaculty("Jane Doe"));
+
         /* Check name pointerness */
         status("Checking that changes are reflected through JSON");
         db.getFaculty("John Doe").setName("John Fro");
 
-        String json = gson.toJson(db);
+        for (String str : db.toJson()) {
+            System.out.println(str);
+        }
 
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(
-                    new FileWriter("fopsdb.json", false));
-			writer.write(json, 0, json.length());
-			writer.flush();
-			//gson.toJson(db, writer);
+                    new FileWriter("fopsdb.json", true));
+			//writer.write(test, 0, test.length());
+			//writer.write(json, 0, json.length());
+			//writer.flush();
+			gson.toJson(db, writer);
 		} catch (IOException e) {
 			System.err.println("Cannot open file fopsdb.json");
 			System.exit(1);
@@ -98,10 +119,15 @@ public class GsonTest {
         try {
             reader = new BufferedReader(
                     new FileReader("fopsdb.json"));
-            db2 = gson.fromJson(reader, FopsDB.class);
+            scan = new Scanner(reader);
+            db2 = FopsDB.fromJson(facjson, comjson);
         } catch (IOException e) {
             System.err.println("Cannot open file fopsdb.json");
             System.exit(1);
+        } finally {
+            if (scan != null) {
+                scan.close();
+            }
         }
         if (reader != null) {
             try {
@@ -110,17 +136,12 @@ public class GsonTest {
                 System.err.println("Could not close reader, not aborting.");
             }
         }
+
         if (db2 != null) {
             System.out.println(gson.toJson(db2));
         } else {
             System.out.println("Ruh roh, Raggy! db2 did not load!");
         }
-
-        /* Check pointers again */
-        System.out.println("Checking that pointers still work");
-        db2.getFaculty("John Fro").setName("John Doe");
-        json = gson.toJson(db2);
-        System.out.println(json); 
     }
 }
 

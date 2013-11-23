@@ -10,6 +10,9 @@ import util.MonthYear;
 
 public class Staff {
 
+    private static int nextID = 0;
+
+    private int dbid;
     private String name;
     private DataTypes.College college;
     private DataTypes.Gender gender;
@@ -20,6 +23,7 @@ public class Staff {
     private boolean hasTenure;
 
     public Staff() {
+        //TODO remove this testing thingy here
         this("John Doe", DataTypes.Gender.MALE, 
                 DataTypes.College.BUSINESS, DataTypes.Discipline.LATIN, 
                 DataTypes.Rank.PROFESSOR, new MonthYear(9, 1985), true);
@@ -27,8 +31,7 @@ public class Staff {
 
     public Staff(String name, DataTypes.Gender gender, 
             DataTypes.College college, DataTypes.Discipline discipline, 
-            DataTypes.Rank rank, MonthYear startDate, 
-            boolean hasTenure) {
+            DataTypes.Rank rank, MonthYear startDate, boolean hasTenure) {
         this.name = name;
         this.gender = gender;
         this.college = college;
@@ -36,7 +39,17 @@ public class Staff {
         this.rank = rank;
         this.startDate = startDate;
         this.hasTenure = hasTenure;
+
         committees = new ArrayList<CommitteeAppointment>();
+        dbid = ++nextID;
+    }
+
+    public void setDBID(int dbid) {
+        this.dbid = dbid;
+    }
+
+    public int getDBID() {
+        return dbid;
     }
 
     public void setName(String name) {

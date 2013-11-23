@@ -10,14 +10,17 @@ import db.rules.*;
 import util.*;
 
 public class Committee {
-    
+
     private String name;
     private Staff chair;
     private Staff secretary;
     private DataTypes.CommitteeType type;
-    private List<Staff> atLargeMembers;
-    private List<Staff> representativeMembers;
+    private List<Integer> atLargeMembers;
+    private List<Integer> representativeMembers;
+    //private List<Staff> atLargeMembers;
+    //private List<Staff> representativeMembers;
     private List<Rule> rules;
+    transient private FopsDB db;
 
     public Committee(String name) {
         this(name, DataTypes.CommitteeType.UNIVERSITY, null);
@@ -29,8 +32,12 @@ public class Committee {
         this.type = type;
         this.rules = (rules == null) ? new ArrayList<Rule>() : rules;
 
-        atLargeMembers = new ArrayList<Staff>();
-        representativeMembers = new ArrayList<Staff>();
+        atLargeMembers = new ArrayList<Integer>();
+        representativeMembers = new ArrayList<Integer>();
+    }
+
+    public void setDB(FopsDB db) {
+        this.db = db;
     }
 
     public String getName() {
@@ -40,28 +47,31 @@ public class Committee {
     public void addAtLargeMember(Staff member) {
         if (isMember(member))
             return;
-        atLargeMembers.add(member);
-        addAppointment(member);
+        addMember(atLargeMembers, member);
     }
 
     public void addRepresentativeMember(Staff member) {
         if (isMember(member))
             return;
-        representativeMembers.add(member);
+        addMember(representativeMembers, member);
+    }
+
+    private void addMember(List<Integer> memberList, Staff member) {
+        memberList.add(member.getDBID());
         addAppointment(member);
     }
 
     private void addAppointment(Staff member) {
         member.addCommitteeAppointment(
-                new CommitteeAppointment(this.name, this.type, 
+                new CommitteeAppointment(this.name, this.type,
                 new MonthYear()));
-
     }
 
     public boolean canJoin(Staff member) {
         for (Rule rule : rules) {
-            if (!rule.isValidMember(this, member))
+            if (!rule.isValidMember(this, member)) {
                 return false;
+            }
         }
         return true;
     }
@@ -74,13 +84,13 @@ public class Committee {
         removeMember(atLargeMembers, member);
     }
 
-    private void removeMember(List<Staff> memberList, Staff member) {
+    private void removeMember(List<Integer> memberList, Staff member) {
         if (!isMember(member)) {
             // TODO: consider exception
             return;
         }
         closeAppointment(member);
-        memberList.remove(member);
+        memberList.remove(member.getDBID());
     }
 
     private void closeAppointment(Staff member) {
@@ -89,8 +99,8 @@ public class Committee {
 
     public int numRepresentativesOfCollege(DataTypes.College college) {
         int representatives = 0;
-        for (Staff member : representativeMembers) {
-            if (member.getCollege() == college) {
+        for (Integer member : representativeMembers) {
+            if (db.getFaculty(member).getCollege() == college) {
                 representatives++;
             }
         }
@@ -99,7 +109,9 @@ public class Committee {
 
     public List<Staff> representativesOfCollege(DataTypes.College college) {
         List<Staff> reps = new ArrayList<Staff>();
-        for (Staff member : representativeMembers) {
+        Staff member;
+        for (Integer memberid : representativeMembers) {
+            member = db.getFaculty(memberid);
             if (member.getCollege() == college) {
                 reps.add(member);
             }
