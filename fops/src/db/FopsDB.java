@@ -17,13 +17,20 @@ public class FopsDB {
     private Map<String, Staff> faculty;
     private Map<String, Committee> committees;
     private static Gson gson;
+    static {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        builder.registerTypeAdapter(Rule.class, new RuleJsonizer());
+        gson = builder.create();
+    }
 
     public FopsDB() {
         faculty = new Hashtable<String, Staff>();
         committees = new Hashtable<String, Committee>();
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Rule.class, new RuleJsonizer());
-        gson = builder.create();
+    }
+
+    public Gson getGson() {
+        return gson;
     }
 
     public String[] toJson() {
