@@ -31,6 +31,10 @@ public class CommitteeAppointment {
         this.endDate = endDate;
     }
 
+    /**
+     * Get the Committee that this is an appointment to.
+     * @return  the Committee
+     */
     public String getCommittee() {
         return committee;
     }

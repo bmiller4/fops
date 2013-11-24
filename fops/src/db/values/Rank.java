@@ -3,7 +3,7 @@ package db.values;
 /**
  * Instructing rank.
  */
-public  enum Rank {
+public enum Rank {
     LECTURER("lecturer"),
     SENIOR_LECTURER("senior lecturer"),
     INSTRUCTOR("instructor"),

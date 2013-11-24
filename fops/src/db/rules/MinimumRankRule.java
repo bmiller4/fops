@@ -11,16 +11,26 @@ import db.values.*;
 public class MinimumRankRule implements Rule {
 
     private Rank rank;
-    
+    private static String description =
+            "Requires a minimum faculty rank";
+
     public MinimumRankRule(Rank rank) {
         this.rank = rank;
     }
 
     @Override
     public String getDescription() {
+        return description; 
+        /*
         return String.format(
                 "Members of this committee must have at least rank %s",
                 rank.getHumanReadable());
+        */
+    }
+
+    @Override
+    public String getLimit() {
+        return rank.toString();
     }
 
     @Override

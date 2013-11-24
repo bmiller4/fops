@@ -1,11 +1,11 @@
 /*
  * The big ol' honking database class for FOPS.
  */
-
 package db;
 
 import java.util.Map;
 import java.util.Hashtable;
+import java.util.Collection;
 import java.lang.reflect.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -95,6 +95,14 @@ public class FopsDB {
     }
 
     /**
+     * Get a Collection of all the committees.
+     * @return  a Collection view of all committees
+     */
+    public Collection<Committee> getAllCommittees() {
+        return committees.values();
+    }
+
+    /**
      * Get a faculty member from the database.
      * @param   dbid the database ID of the faculty member
      * @return  the faculty member
@@ -117,5 +125,13 @@ public class FopsDB {
         }
         //TODO throw exception instead
         return null;
+    }
+
+    /**
+     * Get an array of all Faculty members.
+     * @return  a Collection view of all the faculty members
+     */
+    public Collection<Staff> getAllFaculty() {
+        return faculty.values();
     }
 }

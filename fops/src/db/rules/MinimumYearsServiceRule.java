@@ -10,6 +10,8 @@ import db.*;
 public class MinimumYearsServiceRule implements Rule {
 
     private int minYearsService;
+    private static String description =
+            "Requires a number of years at UMW";
 
     public MinimumYearsServiceRule(int minYearsService) {
         this.minYearsService = minYearsService;
@@ -17,9 +19,17 @@ public class MinimumYearsServiceRule implements Rule {
 
     @Override
     public String getDescription() {
+        return description;
+        /*
         return String.format(
                 "This committee requires that members have served for %d "
                 + "years at UMW.", minYearsService);
+        */
+    }
+
+    @Override
+    public String getLimit() {
+        return (new Integer(minYearsService)).toString();
     }
 
     @Override

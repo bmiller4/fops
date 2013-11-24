@@ -1,20 +1,22 @@
-/**
- * Interface for committee rules.
- */
-
 package db.rules;
 
 import db.*;
 
+/**
+ * Interface for committee rules.
+ */
 public interface Rule {
-
-//    public final String description;
 
     /**
      * Get a human-readable description of the rule.
      * @return a String containing a description of the rule
      */
     public String getDescription();
+    
+    /**
+     * Get a String description of the limit imposed by the rule.
+     */
+    public String getLimit();
 
     /**
      * Determine whether a faculty member can be on a committee, based on
