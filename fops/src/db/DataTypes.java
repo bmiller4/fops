@@ -1,9 +1,8 @@
-/**
- * An enum, yo.
- */
-
 package db;
 
+/**
+ * Enums, yo.
+ */
 public class DataTypes {
     public static enum College {
         ARTS_AND_SCIENCES,
@@ -54,11 +53,11 @@ public class DataTypes {
 //    }
 
     public static enum Discipline {
-        AMER_STUDIES, ANTHRO, ARTS, BIOLOGY, CHEMISTRY,
+        AMER_STUDIES, ANTHROPOLOGY, ARTS, BIOLOGY, CHEMISTRY,
         CLASSICS, COMP_SCI, ECONOMICS, ENGLISH, ENV_SCI,
         FRENCH, GEOGRAPHY, GEOLOGY, HIST_PRESERVATION, HISTORY,
         INATL_AFFAIRS, LATIN, MATH, FOREIGN_LANG, MUSIC, PHILOSOPHY,
-        PHYSICS, POLY_SCI, PSYCH, RELIGION, SOCIOLOGY, THEATRE, 
+        PHYSICS, POLY_SCI, PSYCH, RELIGION, SOCIOLOGY, THEATRE,
         GENDER_STUDIES
     }
 }

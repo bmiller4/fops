@@ -6,12 +6,13 @@
 package db.rules;
 
 import db.*;
+import db.values.*;
 
 public class MinimumRankRule implements Rule {
 
-    private DataTypes.Rank rank;
+    private Rank rank;
     
-    public MinimumRankRule(DataTypes.Rank rank) {
+    public MinimumRankRule(Rank rank) {
         this.rank = rank;
     }
 
