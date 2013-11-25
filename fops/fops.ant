@@ -6,6 +6,7 @@
     <property name="src" location="src"/>
     <property name="bin" location="bin"/>
     <property name="tests" location="src/tests"/>
+	<property name="classpath" location="."/>
 
     <target name="compile" description="compile the source">
         <!-- Compile all but the tests from ${src} into ${bin} -->
