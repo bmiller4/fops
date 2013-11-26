@@ -130,9 +130,9 @@ public class Staff {
      */
     public void closeCommitteeAppointment(String committee,
             MonthYear endDate) {
-        for (CommitteeAppointment appointment : getOpenCommitteeAppointments()) {
-            if (appointment.getCommittee().equals(committee)) {
-                appointment.setEndDate(endDate);
+        for (CommitteeAppointment appoint : getOpenCommitteeAppointments()) {
+            if (appoint.getCommittee().equals(committee)) {
+                appoint.setEndDate(endDate);
             }
         }
     }
