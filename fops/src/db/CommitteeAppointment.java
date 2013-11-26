@@ -32,6 +32,22 @@ public class CommitteeAppointment {
     }
 
     /**
+     * Get the ending date of this appointment.
+     * @return  the ending date of this appointment
+     */
+    public MonthYear getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * Get the starting date of this appointment.
+     * @return  the starting date of this appointment
+     */
+    public MonthYear getStartDate() {
+        return startDate;
+    }
+
+    /**
      * Get the type of the committee.
      * @return  the type of the commitee
      */
