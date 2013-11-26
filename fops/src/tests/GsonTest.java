@@ -39,7 +39,7 @@ public class GsonTest {
         rules.add(new MinimumYearsServiceRule(3));
         rules.add(new NumberRepresentativesRule(1));
         rules.add(new NumberAtLargeMembersRule(2));
-        rules.add(new MinimumRankRule(Rank.ASSOCIATE));
+        rules.add(new MinimumRankRule(Rank.ASSOCIATE_PROFESSOR));
 
         /* Add Committees */
         status("Adding committees");

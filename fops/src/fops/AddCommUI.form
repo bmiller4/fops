@@ -50,19 +50,19 @@
                       <Component id="minRankComboBox" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="repsLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="repsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="repsComboBox" pref="206" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="yearsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="atLargeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="yearsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="atLargeCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="atLargeTextField" max="32767" attributes="0"/>
-                          <Component id="yearsTextField" max="32767" attributes="0"/>
+                          <Component id="atLargeComboBox" max="32767" attributes="0"/>
+                          <Component id="yearsComboBox" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -94,17 +94,17 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="yearsLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="yearsTextField" min="-2" max="-2" attributes="0"/>
+                  <Component id="yearsCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="yearsComboBox" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="atLargeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="atLargeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="atLargeCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="atLargeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="repsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="repsCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="repsComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -143,17 +143,17 @@
         <Property name="text" type="java.lang.String" value="Minimum Rank"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="yearsLabel">
+    <Component class="javax.swing.JCheckBox" name="yearsCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Years at UMW"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="atLargeLabel">
+    <Component class="javax.swing.JCheckBox" name="atLargeCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="At-Large Slots"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="repsLabel">
+    <Component class="javax.swing.JCheckBox" name="repsCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reps Per College"/>
       </Properties>
@@ -166,7 +166,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="yearsTextField">
+    <Component class="javax.swing.JComboBox" name="yearsComboBox">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -185,7 +185,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="atLargeTextField">
+    <Component class="javax.swing.JComboBox" name="atLargeComboBox">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">

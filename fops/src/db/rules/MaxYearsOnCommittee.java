@@ -1,6 +1,7 @@
 package db.rules;
 
 import db.*;
+import java.util.List;
 
 public class MaxYearsOnCommittee implements Rule {
 
@@ -14,7 +15,7 @@ public class MaxYearsOnCommittee implements Rule {
 
     @Override
     public String getDescription() {
-        return description();
+        return description;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class MaxYearsOnCommittee implements Rule {
     public boolean isValidMember(Committee committee, Staff faculty) {
         List<CommitteeAppointment> appointments =
                 faculty.getOpenCommitteeAppointments();
-        CommitteeAppointment appointment;
+        CommitteeAppointment appointment = null;
         for (CommitteeAppointment appoint : appointments) {
             if (committee.getName().equals(appoint.getCommittee())) {
                 appointment = appoint;

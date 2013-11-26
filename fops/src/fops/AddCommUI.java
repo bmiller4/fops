@@ -6,6 +6,9 @@ package fops;
 import db.values.*;
 import javax.swing.DefaultComboBoxModel;
 import db.*;
+import db.rules.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -14,7 +17,7 @@ import javax.swing.JFrame;
  */
 public class AddCommUI extends javax.swing.JFrame {
     private FopsDB db;
-    /**
+    /*
      * Creates new form AddCommUI
      */
     public AddCommUI(String title, FopsDB db){
@@ -43,12 +46,12 @@ public class AddCommUI extends javax.swing.JFrame {
         committeeTextField = new javax.swing.JTextField();
         typeComboBox = new javax.swing.JComboBox();
         minRankCheckBox = new javax.swing.JCheckBox();
-        yearsLabel = new javax.swing.JCheckBox();
-        atLargeLabel = new javax.swing.JCheckBox();
-        repsLabel = new javax.swing.JCheckBox();
+        yearsCheckBox = new javax.swing.JCheckBox();
+        atLargeCheckBox = new javax.swing.JCheckBox();
+        repsCheckBox = new javax.swing.JCheckBox();
         minRankComboBox = new javax.swing.JComboBox();
-        yearsTextField = new javax.swing.JComboBox();
-        atLargeTextField = new javax.swing.JComboBox();
+        yearsComboBox = new javax.swing.JComboBox();
+        atLargeComboBox = new javax.swing.JComboBox();
         repsComboBox = new javax.swing.JComboBox();
         createCommittee = new javax.swing.JButton();
 
@@ -67,20 +70,20 @@ public class AddCommUI extends javax.swing.JFrame {
 
         minRankCheckBox.setText("Minimum Rank");
 
-        yearsLabel.setText("Years at UMW");
+        yearsCheckBox.setText("Years at UMW");
 
-        atLargeLabel.setText("At-Large Slots");
+        atLargeCheckBox.setText("At-Large Slots");
 
-        repsLabel.setText("Reps Per College");
+        repsCheckBox.setText("Reps Per College");
 
         minRankComboBox.setEditable(true);
         minRankComboBox.setModel(new DefaultComboBoxModel(Rank.values()));
 
-        yearsTextField.setEditable(true);
-        yearsTextField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+" }));
+        yearsComboBox.setEditable(true);
+        yearsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+" }));
 
-        atLargeTextField.setEditable(true);
-        atLargeTextField.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        atLargeComboBox.setEditable(true);
+        atLargeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         repsComboBox.setEditable(true);
         repsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -111,17 +114,17 @@ public class AddCommUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(minRankComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(repsLabel)
+                        .addComponent(repsCheckBox)
                         .addGap(18, 18, 18)
                         .addComponent(repsComboBox, 0, 206, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(yearsLabel)
-                            .addComponent(atLargeLabel))
+                            .addComponent(yearsCheckBox)
+                            .addComponent(atLargeCheckBox))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(atLargeTextField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(yearsTextField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(atLargeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(yearsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
@@ -145,15 +148,15 @@ public class AddCommUI extends javax.swing.JFrame {
                     .addComponent(minRankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(yearsLabel)
-                    .addComponent(yearsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(yearsCheckBox)
+                    .addComponent(yearsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(atLargeLabel)
-                    .addComponent(atLargeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(atLargeCheckBox)
+                    .addComponent(atLargeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(repsLabel)
+                    .addComponent(repsCheckBox)
                     .addComponent(repsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(createCommittee)
@@ -165,8 +168,29 @@ public class AddCommUI extends javax.swing.JFrame {
 
     private void createCommitteeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCommitteeActionPerformed
         String name = committeeTextField.getText();
-        
+        CommitteeType type = (CommitteeType) typeComboBox.getSelectedItem();
+        List<Rule> rules = new ArrayList<>();
+        if(minRankCheckBox.isSelected()){
+            rules.add(new MinimumRankRule(
+                    (Rank) minRankComboBox.getSelectedItem()));
+        }
+        if(yearsCheckBox.isSelected()){
+            rules.add(new MinimumYearsServiceRule(
+                    yearsComboBox.getSelectedIndex() + 1));
+        }
+        if(atLargeCheckBox.isSelected()){
+            rules.add(new NumberAtLargeMembersRule(
+                    atLargeComboBox.getSelectedIndex() + 1));
+        }
+        if(repsCheckBox.isSelected()){
+            rules.add(new NumberRepresentativesRule(
+                    repsComboBox.getSelectedIndex() + 1));
+        }
+        rules.add(new MaxYearsOnCommittee(3));
+        rules.add(new MaxCommitteesPerFaculty());
+        db.addCommittee(new Committee(name,type,rules));
         dispose();
+        
         
     }//GEN-LAST:event_createCommitteeActionPerformed
 
@@ -201,19 +225,19 @@ public class AddCommUI extends javax.swing.JFrame {
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox atLargeLabel;
-    private javax.swing.JComboBox atLargeTextField;
+    private javax.swing.JCheckBox atLargeCheckBox;
+    private javax.swing.JComboBox atLargeComboBox;
     private javax.swing.JTextField committeeTextField;
     private javax.swing.JButton createCommittee;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JCheckBox minRankCheckBox;
     private javax.swing.JComboBox minRankComboBox;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JCheckBox repsCheckBox;
     private javax.swing.JComboBox repsComboBox;
-    private javax.swing.JCheckBox repsLabel;
     private javax.swing.JComboBox typeComboBox;
     private javax.swing.JLabel typeLabel;
-    private javax.swing.JCheckBox yearsLabel;
-    private javax.swing.JComboBox yearsTextField;
+    private javax.swing.JCheckBox yearsCheckBox;
+    private javax.swing.JComboBox yearsComboBox;
     // End of variables declaration//GEN-END:variables
 }

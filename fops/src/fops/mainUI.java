@@ -5,6 +5,7 @@
 package fops;
 import db.*;
 import javax.swing.JFrame;
+import util.*;
 
 
 /**
@@ -13,17 +14,19 @@ import javax.swing.JFrame;
  */
 public class mainUI extends javax.swing.JFrame {
     private FopsDB db;
-    /**
+    /** 
      * Creates new form mainUI
      */
+    
     public mainUI() {
+        super("Faculty Organization Planning Software [FOPS]");
         db = new FopsDB();
         initComponents();
+        commViewButton.setActionCommand("committee");
+        facultyViewButton.setActionCommand("faculty");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,26 +36,39 @@ public class mainUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        viewGroup = new javax.swing.ButtonGroup();
         filterTextField = new javax.swing.JTextField();
-        CommViewButton = new javax.swing.JRadioButton();
+        commViewButton = new javax.swing.JRadioButton();
         facultyViewButton = new javax.swing.JRadioButton();
         filterButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        mainList = new javax.swing.JList();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu = new javax.swing.JMenu();
         saveMenu = new javax.swing.JMenuItem();
         addFaculty = new javax.swing.JMenuItem();
         addCommittee = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         filterTextField.setText("Filter Results");
 
-        CommViewButton.setText("Committee View");
+        viewGroup.add(commViewButton);
+        commViewButton.setSelected(true);
+        commViewButton.setText("Committee View");
+        commViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commViewButtonActionPerformed(evt);
+            }
+        });
 
+        viewGroup.add(facultyViewButton);
         facultyViewButton.setText("Faculty View");
+        facultyViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facultyViewButtonActionPerformed(evt);
+            }
+        });
 
         filterButton.setText("Filter");
         filterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,13 +77,13 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        mainList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
+        mainList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(mainList);
 
         menu.setText("File");
 
@@ -98,9 +114,6 @@ public class mainUI extends javax.swing.JFrame {
 
         jMenuBar1.add(menu);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,7 +131,7 @@ public class mainUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(CommViewButton)
+                                .addComponent(commViewButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(facultyViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 449, Short.MAX_VALUE)))
@@ -135,14 +148,35 @@ public class mainUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CommViewButton)
+                    .addComponent(commViewButton)
                     .addComponent(facultyViewButton))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void createListModel(){
+        String filter = filterTextField.getText();
+        if(filter.equals("")){
+            filter = "*";
+        }
+        Glob glob = new Glob(filter);
+        if(viewGroup.getSelection().getActionCommand().equals("committee")){
+            committeeListModel(glob);
+        }
+        if(viewGroup.getSelection().getActionCommand().equals("faculty")){
+            facultyListModel(glob);
+        }
+            
+    }
+    private void committeeListModel(Glob glob) {
+        
+        
+    }
+    private void facultyListModel(Glob glob){
+        
+    }
+    
     private void saveMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuActionPerformed
         
     }//GEN-LAST:event_saveMenuActionPerformed
@@ -158,6 +192,14 @@ public class mainUI extends javax.swing.JFrame {
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
         
     }//GEN-LAST:event_filterButtonActionPerformed
+
+    private void commViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commViewButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commViewButtonActionPerformed
+
+    private void facultyViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facultyViewButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_facultyViewButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,26 +227,23 @@ public class mainUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(mainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new mainUI().setVisible(true);
-            }
-        });
+       
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton CommViewButton;
     private javax.swing.JMenuItem addCommittee;
     private javax.swing.JMenuItem addFaculty;
+    private javax.swing.JRadioButton commViewButton;
     private javax.swing.JRadioButton facultyViewButton;
     private javax.swing.JButton filterButton;
     private javax.swing.JTextField filterTextField;
-    private javax.swing.JList jList1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList mainList;
     private javax.swing.JMenu menu;
     private javax.swing.JMenuItem saveMenu;
+    private javax.swing.ButtonGroup viewGroup;
     // End of variables declaration//GEN-END:variables
 }
