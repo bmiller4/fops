@@ -130,10 +130,22 @@ public class Staff {
      */
     public void closeCommitteeAppointment(String committee,
             MonthYear endDate) {
-        for (CommitteeAppointment appointment : committees) {
-            if (appointment.isActive() 
-                    && appointment.getCommittee().equals(committee)) {
+        for (CommitteeAppointment appointment : getOpenCommitteeAppointments) {
+            if (appointment.getCommittee().equals(committee)) {
                 appointment.setEndDate(endDate);
+            }
+        }
+    }
+
+    /**
+     * Get a list of open committee appointments.
+     * @return  a list of open committee appointments
+     */
+    public List<CommitteeAppointment> getOpenCommitteeAppointments() {
+        List<CommitteeAppointment> openAppointments = new ArrayList<>();
+        for (CommitteeAppointment appointment : committees) {
+            if (appointment.isActive()) {
+                openAppointments.add(appointment);
             }
         }
     }
