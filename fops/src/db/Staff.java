@@ -157,7 +157,7 @@ public class Staff {
      */
     @Override
     public String toString() {
-        return String.format("%s\t%s\t%s\t%s", name, college.toString(),
+        return String.format("%s    %s    %s    %s", name, college.toString(),
                 discipline.toString(), rank.toString());
     }
 }

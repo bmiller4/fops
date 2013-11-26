@@ -48,7 +48,7 @@ public class Committee {
 
     /**
      * Set the database that holds the members for the committees.
-     * @param   db the database that holds faculty information
+     * @param   sdb the database that holds faculty information
      */
     public void setDB(FopsDB db) {
         this.db = db;
@@ -236,6 +236,7 @@ public class Committee {
      */
     @Override
     public String toString() {
-        return String.format("%s %s", name, type.toString());
+        return ("hello");
+       // return String.format("%s %s", name, type.toString());
     }
 }

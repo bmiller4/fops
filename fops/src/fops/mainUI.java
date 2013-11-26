@@ -4,6 +4,10 @@
  */
 package fops;
 import db.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import util.*;
 
@@ -51,7 +55,11 @@ public class mainUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        filterTextField.setText("Filter Results");
+        filterTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterTextFieldActionPerformed(evt);
+            }
+        });
 
         viewGroup.add(commViewButton);
         commViewButton.setSelected(true);
@@ -77,11 +85,7 @@ public class mainUI extends javax.swing.JFrame {
             }
         });
 
-        mainList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        mainList.setModel(new DefaultListModel());
         mainList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(mainList);
 
@@ -161,19 +165,59 @@ public class mainUI extends javax.swing.JFrame {
             filter = "*";
         }
         Glob glob = new Glob(filter);
-        if(viewGroup.getSelection().getActionCommand().equals("committee")){
+        if(viewGroup.getSelection().getActionCommand() == null){
             committeeListModel(glob);
         }
-        if(viewGroup.getSelection().getActionCommand().equals("faculty")){
-            facultyListModel(glob);
+        if(viewGroup.getSelection().getActionCommand().equals("committee")){
+           committeeListModel(glob);
         }
+        facultyListModel(glob);
+        
             
     }
+    
     private void committeeListModel(Glob glob) {
-        
+        List<String> names= new ArrayList<>();
+        Collection<Committee> comms = db.getAllCommittees();
+        System.out.println(comms.size());
+        for(Committee comm : comms){
+            
+            if(glob.matches(comm.getName())){
+                System.out.println(comm.getName());
+                System.out.println("heyo got here");
+                names.add(comm.getName());
+                
+            }
+        }
+        System.out.println(names.size());
+        generateListModel(names);
         
     }
+    
     private void facultyListModel(Glob glob){
+        List<String> faculty = new ArrayList<>();
+        for(Staff fac : db.getAllFaculty()){
+            if(glob.matches(fac.getName())){
+                faculty.add(fac.toString());
+            }
+        }
+        generateListModel(faculty);
+        
+    }
+    
+    private void generateListModel(List<String> s){
+        DefaultListModel model = new DefaultListModel();
+       // DefaultListModel model = (DefaultListModel) mainList.getModel();
+        model.removeAllElements();
+        System.out.println(s.size());
+        for(String str : s){
+            model.addElement(str);
+        }
+        mainList.setModel(model);
+        System.out.println(model.firstElement());
+        mainList.setSelectedIndex(0);
+        
+        
         
     }
     
@@ -190,16 +234,21 @@ public class mainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addCommitteeActionPerformed
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-        
+        createListModel();
     }//GEN-LAST:event_filterButtonActionPerformed
 
     private void commViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commViewButtonActionPerformed
-        // TODO add your handling code here:
+        createListModel();
+        //facultyViewButtonActionPerformed(evt);
     }//GEN-LAST:event_commViewButtonActionPerformed
 
     private void facultyViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facultyViewButtonActionPerformed
-        // TODO add your handling code here:
+        createListModel();
     }//GEN-LAST:event_facultyViewButtonActionPerformed
+
+    private void filterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filterTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
