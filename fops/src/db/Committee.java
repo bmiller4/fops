@@ -63,6 +63,14 @@ public class Committee {
     }
 
     /**
+     * Get the type of the committee.
+     * @return  the type of the committee
+     */
+    public CommitteeType getCommitteeType() {
+        return type;
+    }
+
+    /**
      * Add an at-large member to the committee.
      * @param   member the member to add
      */

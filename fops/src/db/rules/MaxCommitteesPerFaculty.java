@@ -1,6 +1,9 @@
 package db.rules;
 
 import db.*;
+import db.values.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MaxCommitteesPerFaculty implements Rule {
 	
@@ -32,6 +35,38 @@ public class MaxCommitteesPerFaculty implements Rule {
 
     @Override
     public boolean isValidMember(Committee committee, Staff faculty) {
+        int uni, stand, adhoc;
+        uni = stand = adhoc = 0;
+        List<CommitteeAppointment> appointments = 
+                faculty.getOpenCommitteeAppointments();
+
+        switch (committee.getCommitteeType()) {
+        case UNIVERSITY:
+            uni++;
+            break;
+        case STANDING:
+            stand++;
+            break;
+        case FACULTY_ADVISORY: case AD_HOC:
+            adhoc++;
+            break;
+        }
+        for (CommitteeAppointment appointment : appointments) {
+            switch (appointment.getCommitteeType()) {
+            case UNIVERSITY:
+                uni++;
+                break;
+            case STANDING:
+                stand++;
+                break;
+            case FACULTY_ADVISORY: case AD_HOC:
+                adhoc++;
+                break;
+            }
+        }
+
+        if (uni > university || stand > standing || adhoc > advisoryAndAdHoc)
+            return false;
         return true;
     }
 }
