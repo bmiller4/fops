@@ -32,6 +32,6 @@ public class MaxCommitteesPerFaculty implements Rule {
 
     @Override
     public boolean isValidMember(Committee committee, Staff faculty) {
-
+        return true;
     }
 }
