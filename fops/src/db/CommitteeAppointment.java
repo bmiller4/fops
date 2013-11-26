@@ -33,7 +33,7 @@ public class CommitteeAppointment {
 
     /**
      * Get the type of the committee.
-     * @return  the type of the commitee
+     * @return  the type of the committee
      */
     public CommitteeType getCommitteeType() {
         return type;
