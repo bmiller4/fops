@@ -55,6 +55,14 @@ public class Committee {
     }
 
     /**
+     * Add a rule.
+     * @param   rule the rule to add
+     */
+    public void addRule(Rule rule) {
+        rules.add(rule);
+    }
+
+    /**
      * Get the name of the committee.
      * @return  the name of the committee
      */
