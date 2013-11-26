@@ -7,8 +7,8 @@ public enum Rank {
     LECTURER("lecturer"),
     SENIOR_LECTURER("senior lecturer"),
     INSTRUCTOR("instructor"),
-    ASSISTANT("assistant professor"),
-    ASSOCIATE("associate professor"),
+    ASSISTANT_PROFESSOR("assistant professor"),
+    ASSOCIATE_PROFESSOR("associate professor"),
     PROFESSOR("professor");
 
     private final String humanReadable;
