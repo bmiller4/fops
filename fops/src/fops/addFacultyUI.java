@@ -6,19 +6,33 @@ package fops;
 
 import db.values.*;
 import javax.swing.DefaultComboBoxModel;
+import db.*;
+import javax.swing.JFrame;
+import util.*;
+
+
 
 /**
  *
  * @author brennan
  */
 public class addFacultyUI extends javax.swing.JFrame {
+    
+private FopsDB db;
 
     /**
      * Creates new form addFacultyUI
      */
-    public addFacultyUI() {
+    public addFacultyUI(String title, FopsDB db){
+        super(title);
+        this.db = db;
         initComponents();
+        maleRadio.setActionCommand("Male");
+        femaleRadio.setActionCommand("Female");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        setVisible(true);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,45 +44,53 @@ public class addFacultyUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox5 = new javax.swing.JComboBox();
-        addFacultyLabel = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        genderGroup = new javax.swing.ButtonGroup();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jCheckBox1 = new javax.swing.JCheckBox();
         nameLabel = new javax.swing.JLabel();
         rankLabel = new javax.swing.JLabel();
-        tenureLabel = new javax.swing.JLabel();
         monthLabel = new javax.swing.JLabel();
         yearLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        memberTypeLabel = new javax.swing.JLabel();
         firstNameText = new javax.swing.JTextField();
         middleNameText = new javax.swing.JTextField();
         lastNameText = new javax.swing.JTextField();
         rankComboBox = new javax.swing.JComboBox();
-        yesCheckbox = new javax.swing.JCheckBox();
-        noCheckbox = new javax.swing.JCheckBox();
+        hasTenureCheckBox = new javax.swing.JCheckBox();
         monthComboBox = new javax.swing.JComboBox();
-        yearComboBox = new javax.swing.JComboBox();
-        memberTypeCombo = new javax.swing.JComboBox();
         femaleRadio = new javax.swing.JRadioButton();
         maleRadio = new javax.swing.JRadioButton();
         genderLabel = new javax.swing.JLabel();
-        otherRadio = new javax.swing.JRadioButton();
+        collegeLabel = new javax.swing.JLabel();
+        discLabel = new javax.swing.JLabel();
+        collegeComboBox = new javax.swing.JComboBox();
+        discComboBox = new javax.swing.JComboBox();
+        yearTextField = new javax.swing.JTextField();
+        createFacultyMember = new javax.swing.JButton();
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
 
-        addFacultyLabel.setText("Add Faculty");
+        jCheckBox1.setText("jCheckBox1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         nameLabel.setText("Name");
 
         rankLabel.setText("Rank");
 
-        tenureLabel.setText("Tenure");
-
         monthLabel.setText("Month Enstated");
 
         yearLabel.setText("Year Enstated");
-
-        memberTypeLabel.setText("Type of Member");
 
         firstNameText.setText("First");
 
@@ -89,28 +111,48 @@ public class addFacultyUI extends javax.swing.JFrame {
             }
         });
 
-        yesCheckbox.setText("Yes");
+        hasTenureCheckBox.setText("Has Tenure");
 
-        noCheckbox.setText("No");
-        noCheckbox.addActionListener(new java.awt.event.ActionListener() {
+        monthComboBox.setEditable(true);
+        monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        genderGroup.add(femaleRadio);
+        femaleRadio.setSelected(true);
+        femaleRadio.setText("Female");
+
+        genderGroup.add(maleRadio);
+        maleRadio.setText("Male");
+        maleRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                noCheckboxActionPerformed(evt);
+                maleRadioActionPerformed(evt);
             }
         });
 
-        monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        yearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        memberTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        femaleRadio.setText("Female");
-
-        maleRadio.setText("Male");
-
         genderLabel.setText("Gender");
 
-        otherRadio.setText("Other");
+        collegeLabel.setText("College");
+
+        discLabel.setText("Discipline");
+
+        collegeComboBox.setEditable(true);
+        collegeComboBox.setModel(new DefaultComboBoxModel(College.values()));
+
+        discComboBox.setEditable(true);
+        discComboBox.setModel(new DefaultComboBoxModel(Discipline.values()));
+
+        yearTextField.setText("2013");
+        yearTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearTextFieldActionPerformed(evt);
+            }
+        });
+
+        createFacultyMember.setText("Create Faculty Member");
+        createFacultyMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createFacultyMemberActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,58 +164,56 @@ public class addFacultyUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(nameLabel))
+                                .addComponent(monthLabel))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(151, 151, 151)
-                                .addComponent(addFacultyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(12, 12, 12)
+                                .addComponent(yearLabel)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(genderLabel)
+                                .addGap(115, 115, 115)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(monthComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(yearTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(femaleRadio)
+                                            .addComponent(maleRadio))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(nameLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(discLabel)
+                                    .addComponent(collegeLabel)
                                     .addComponent(rankLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(monthLabel)
-                                    .addComponent(yearLabel)
-                                    .addComponent(memberTypeLabel))
-                                .addGap(18, 18, 18)
+                                    .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(middleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(33, 33, 33)
                                         .addComponent(lastNameText))
                                     .addComponent(rankComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(monthComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(yearComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(memberTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tenureLabel)
-                                    .addComponent(genderLabel))
-                                .addGap(103, 103, 103)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(collegeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(maleRadio)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(femaleRadio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(otherRadio)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(yesCheckbox)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(noCheckbox)))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(hasTenureCheckBox)
+                                            .addComponent(discComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addComponent(createFacultyMember)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(addFacultyLabel)
-                .addGap(37, 37, 37)
+                .addContainerGap()
                 .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -184,32 +224,38 @@ public class addFacultyUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rankLabel)
                     .addComponent(rankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tenureLabel)
-                    .addComponent(yesCheckbox)
-                    .addComponent(noCheckbox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(femaleRadio)
-                    .addComponent(maleRadio)
-                    .addComponent(genderLabel)
-                    .addComponent(otherRadio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(memberTypeLabel)
-                    .addComponent(memberTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(monthLabel)
-                    .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yearLabel)
-                    .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addComponent(hasTenureCheckBox)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(collegeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(collegeLabel))
+                        .addGap(48, 48, 48))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(discComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(discLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(genderLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(femaleRadio)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(monthLabel)
+                                .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(yearLabel)
+                            .addComponent(yearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(createFacultyMember))
+                    .addComponent(maleRadio))
+                .addContainerGap())
         );
 
         pack();
@@ -223,66 +269,64 @@ public class addFacultyUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rankComboBoxActionPerformed
 
-    private void noCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noCheckboxActionPerformed
+    private void maleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_noCheckboxActionPerformed
+    }//GEN-LAST:event_maleRadioActionPerformed
+
+    private void yearTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yearTextFieldActionPerformed
+
+    private void createFacultyMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFacultyMemberActionPerformed
+        String name = firstNameText.getText() +" "+  middleNameText.getText()
+                +" "+ lastNameText.getText();
+        Rank rank = (Rank) rankComboBox.getSelectedItem();
+        boolean hasTenure = hasTenureCheckBox.isSelected();
+        College college = (College) collegeComboBox.getSelectedItem();
+        Discipline disc = (Discipline) discComboBox.getSelectedItem();
+        String gend = genderGroup.getSelection().getActionCommand();
+        Gender gender = gend.equals("Male") ? Gender.MALE : Gender.FEMALE;
+        int month = monthComboBox.getSelectedIndex() + 1;
+        int year =  Integer.parseInt(yearTextField.getText());
+        db.addFaculty(new Staff(name,gender,college,disc,rank,
+                new MonthYear(month,year),hasTenure));
+       
+        System.out.println(db.toJson());
+        dispose();  
+        
+    }//GEN-LAST:event_createFacultyMemberActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addFacultyUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addFacultyUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addFacultyUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addFacultyUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new addFacultyUI().setVisible(true);
-            }
-        });
-    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addFacultyLabel;
+    private javax.swing.JComboBox collegeComboBox;
+    private javax.swing.JLabel collegeLabel;
+    private javax.swing.JButton createFacultyMember;
+    private javax.swing.JComboBox discComboBox;
+    private javax.swing.JLabel discLabel;
     private javax.swing.JRadioButton femaleRadio;
     private javax.swing.JTextField firstNameText;
+    private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JCheckBox hasTenureCheckBox;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastNameText;
     private javax.swing.JRadioButton maleRadio;
-    private javax.swing.JComboBox memberTypeCombo;
-    private javax.swing.JLabel memberTypeLabel;
     private javax.swing.JTextField middleNameText;
     private javax.swing.JComboBox monthComboBox;
     private javax.swing.JLabel monthLabel;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JCheckBox noCheckbox;
-    private javax.swing.JRadioButton otherRadio;
     private javax.swing.JComboBox rankComboBox;
     private javax.swing.JLabel rankLabel;
-    private javax.swing.JLabel tenureLabel;
-    private javax.swing.JComboBox yearComboBox;
     private javax.swing.JLabel yearLabel;
-    private javax.swing.JCheckBox yesCheckbox;
+    private javax.swing.JTextField yearTextField;
     // End of variables declaration//GEN-END:variables
 }

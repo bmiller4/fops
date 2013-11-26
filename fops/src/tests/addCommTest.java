@@ -2,18 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fops;
+package tests;
+
+import db.FopsDB;
+import javax.swing.JFrame;
+import fops.AddCommUI;
 
 /**
  *
  * @author brennan
  */
-public class addProfToCommUI extends javax.swing.JFrame {
+public class addCommTest extends javax.swing.JFrame {
 
     /**
-     * Creates new form addProfToCommUI
+     * Creates new form addCommTest
      */
-    public addProfToCommUI() {
+    public addCommTest() {
         initComponents();
     }
 
@@ -59,22 +63,24 @@ public class addProfToCommUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addProfToCommUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCommTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addProfToCommUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCommTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addProfToCommUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCommTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addProfToCommUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCommTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new addProfToCommUI().setVisible(true);
-            }
-        });
+        AddCommUI ui = new AddCommUI("Add Committee", new FopsDB());
+        ui.setLocationRelativeTo(null);
+        ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ui.setSize(500, 500);
+        ui.pack();
+        ui.setVisible(true);
+           
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
