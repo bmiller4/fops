@@ -150,4 +150,14 @@ public class Staff {
         }
         return openAppointments;
     }
+
+    /**
+     * Return a readable string of this
+     * @return  a readable string of this
+     */
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t%s\t%s", name, college.toString(),
+                discipline.toString(), rank.toString());
+    }
 }

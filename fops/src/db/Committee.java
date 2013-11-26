@@ -229,4 +229,13 @@ public class Committee {
             // TODO: throw exception here
         }
     }
+
+    /**
+     * Convert to a string for display.
+     * @return  the string
+     */
+    @Override
+    public String toString() {
+        return String.format("%s %s", name, type.toString());
+    }
 }

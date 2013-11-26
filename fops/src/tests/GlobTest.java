@@ -52,5 +52,11 @@ public class GlobTest {
         name = "Mario";
         matches = glob.matches(name);
         System.out.printf(format, matches ? "" : " not", name);
+
+        glob = new Glob("");
+        System.out.println(glob.toString());
+        name = "Brennan";
+        matches = glob.matches(name);
+        System.out.printf(format, matches ? "" : " not", name);
     }
 }
